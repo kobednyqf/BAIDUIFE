@@ -1,6 +1,6 @@
 /*main.css*/
 body{margin: 0;padding: 0}
-body{min-width: 320px}
+/*body{min-width: 320px}*/
 body{background-color: rgb(51,122,183)}
 body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif}
 .clearfix:before,
