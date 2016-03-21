@@ -1,0 +1,57 @@
+body{margin: 0;padding: 0}
+body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif}
+/*col*/
+.grid-container{
+	width:100%;
+	max-width: 1200px;
+}
+
+.row:before,
+.row:after{
+	content: "";
+	display: table;
+	clear:both;
+}
+
+[class*='col-'] {
+	float: left;
+	min-height: 1px;
+	width:16.66%;
+	background-color: white;
+}
+
+[class*='col-'] > p {
+    background-color: #80B6F5; 
+    padding: 0;
+    margin: 0;
+    text-align: center; 
+    color: white; 
+    line-height: 50px;
+}
+.outline p{
+	margin: 10px;
+    outline: 1px solid #D1F1FF; 
+}
+/*md*/
+@media all and (min-width:769px){
+	.col-1-md{width: 8.33%}
+	.col-2-md{width: 16.66%}
+	.col-3-md{width: 25%}
+	.col-4-md{width: 33.33%}
+	.col-6-md{width: 50%}
+	.col-12-md{width: 100%}
+}
+/*sm*/
+@media all and (max-width:768px){
+	.col-1-sm{width: 8.33%}
+	.col-2-sm{width: 16.66%}
+	.col-3-sm{width: 25%}
+	.col-4-sm{width: 33.33%}
+	.col-6-sm{width: 50%}
+	.col-8-sm{width: 66.66%}
+	.col-12-sm{width: 100%}
+}
+/*xs*/
+@media all and (max-width:640px){
+	.row div{width: 100%}
+}
