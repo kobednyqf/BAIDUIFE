@@ -36,10 +36,9 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 }
 .flex-parent{
 	display: flex;
-	justify-content:center;
-	align-items:center;
 }
 .flex-child{
+	margin: auto;
 	width: 400px;
 	height: 200px;
 }

@@ -1,0 +1,38 @@
+.container{
+	display: flex;
+}
+
+.bg-h2co3{
+	background-color: rgb(51,122,183);
+}
+
+.bg-orange{
+	background-color: orange;
+}
+
+.h150{height: 150px}
+.h120{height: 120px}
+.h40{height: 40px}
+.h200{height: 200px}
+
+
+.h150 ,.h120 ,.h40 ,.h200{
+	width: 150px;
+}
+@media all and (min-width:769px){
+	.container{
+		justify-content:space-between;
+		align-items:center;
+	}
+}
+@media all and (max-width:768px){
+	.container{
+		flex-flow:row wrap;
+		justify-content:space-between;
+		align-items:flex-start;
+	}	
+
+	.h200{
+		order:-1;
+	}
+}
