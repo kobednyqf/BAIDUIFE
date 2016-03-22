@@ -15,6 +15,7 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 .ellipsis{white-space: nowrap;overflow-x:hidden;overflow-y:hidden;text-overflow:ellipsis;}
 .flex{
 	display: flex;
+	display: -webkit-flex;
 	flex-direction:row;
 	-webkit-flex-direction:row;
 	justify-content:space-around;
