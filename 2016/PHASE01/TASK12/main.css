@@ -1,0 +1,80 @@
+body{margin:0;padding: 0}
+body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif}
+
+main > div{
+	margin-top:20px;
+	margin-left:20px;
+}
+table{
+	border-collapse:collapse;
+}
+
+
+
+table tr:nth-of-type(2n+1){
+	background: #F3F3F3;
+}
+
+table tr:nth-of-type(2n){
+	background: white;
+}
+
+table tr:nth-child(1){background-color:gray;color: white}
+table tr:nth-child(2){color:red;}
+table tr:nth-child(3){color:red;}
+table tr:nth-child(4){color:red;}
+
+.css3-input{
+	width:5em;
+	transition:width 0.6s ease-in-out;
+	-webkit-transition:width 0.6s ease-in-out;
+
+}
+
+.css3-input:focus{
+	width:10em;
+}
+
+.window{
+	position: relative;
+	width: 300px;
+	height: 200px;
+}
+
+.of-hd{
+	overflow: hidden;
+	white-space: nowrap;
+}
+.ul{padding: 0;margin: 0}
+.ul{
+	position: relative;
+}
+.ul li{
+	display: inline-block;
+	height: 200px;
+	width: 300px;
+	float: left;
+	position: absolute;
+}
+.relative{position: relative;}
+.ul li:nth-child(1){background-color: #FF8A00}
+.ul li:nth-child(2){background-color: #FFDD00}
+.ul li:nth-child(3){background-color: #B7FF00}
+.cl{position: absolute;left:150px;bottom:0;margin: 0}
+.cl li,.cl{z-index: 999;}
+.cl li a{text-decoration: none;color: white}
+.cl li{background-color: rgba(255,255,255,0.5)}
+.cl li{display: inline-block;width: 2em;height: 2em;line-height: 2em;text-align: center}
+
+@keyframes scroll {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+.ul li:target {
+  z-index: 2;
+  animation: scroll 500ms linear;
+}
