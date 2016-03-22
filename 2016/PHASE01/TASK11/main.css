@@ -14,12 +14,22 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 #nav{}
 .ellipsis{white-space: nowrap;overflow-x:hidden;overflow-y:hidden;text-overflow:ellipsis;}
 .flex{
-	display: flex;
-	display: -webkit-flex;
+	display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+    display: -moz-box; /* Firefox 17- */
+    display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+    display: -moz-flex; /* Firefox 18+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
 	flex-direction:row;
 	-webkit-flex-direction:row;
+	-moz-flex-direction:row;
+	-ms-flex-direction:row;
+	-o-flex-direction:row;
 	justify-content:space-around;
 	-webkit-justify-content:space-around;
+	-moz-justify-content:space-around;
+	-ms-justify-content:space-around;
+	-o-justify-content:space-around;
 }
 .chip{display: inline-block;font-size: 15px;color: black;width: 15%;text-align: center;margin: 0;padding: 0}
 .lh20{line-height: 20px}
