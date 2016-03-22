@@ -33,6 +33,7 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 	left:50%;
 	position: absolute;
 	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
 }
 .flex-parent{
 	display: flex;
