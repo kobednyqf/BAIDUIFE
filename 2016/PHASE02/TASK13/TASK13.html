@@ -38,7 +38,7 @@ function addEvent(element,event,listener){
   var span = document.getElementById("aqi-display");
   addEvent(bt,'click',function(){
     var val = input.value;
-    if(val.length<1){
+    if(val.replace(/ /ig,"").length<1){
       return false;
     }
     span.innerHTML = val;
