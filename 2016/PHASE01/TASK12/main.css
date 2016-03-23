@@ -53,7 +53,6 @@ table tr:nth-child(4){color:red;}
 	display: inline-block;
 	height: 200px;
 	width: 300px;
-	float: left;
 	position: absolute;
 }
 .relative{position: relative;}
@@ -75,6 +74,6 @@ table tr:nth-child(4){color:red;}
   }
 }
 .ul li:target {
-  z-index: 2;
+  z-index: 1;
   animation: scroll 500ms linear;
 }
