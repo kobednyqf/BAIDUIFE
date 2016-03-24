@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>课程表</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div class="relative bg-h2co3 clearfix h800 flex-parent">
+        <div class="bg-white relative bg-white flex-child">
+            <input class="hd-input" maxlength="6" type="text" id="input"/>
+            <p id="p1">课程查询</p>
+            <div id="wrap"></div>
+            <div class="top-corner bg-fc"></div>
+            <div class="bottom-corner bg-fc"></div>
+        </div>
+    </div>
+<!--引入无脑的本地js数据-->
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript">
+    //jQuery源代码的大addEvent函数
+    function addEvent(element,event,listener){
+        if(element.addEventListener){
+            element.addEventListener(event,listener,false);//不捕获
+        }
+        else if(element.attachEvent){
+            element.attachEvent("on"+event,listener);
+        }
+        else{
+            element["on"+event] = listener;
+        }
+    }   
+
+
+
+    var input = document.getElementById("input");
+    var p1 = document.getElementById("p1");
+    var wrap = document.getElementById("wrap");
+
+    //查询函数
+    //三层嵌套
+    //根据课程名字查询
+    //位置-num
+    //星期-i
+    //第几节-j
+    function search(x){
+        var returnData=[];
+        if(x.length<1){
+            return false;
+        }
+        else{
+            for(var num=0;num<data.length;num++){
+                //先查询各个教室的表
+                for(var i=0;i<data[num].list.length;i++){
+                    //查询教室num的星期i
+                    for(var j in data[num].list[i].course){
+                        //因为是JSON对象不是数组了所以用var in方法
+                        //查询301星期i的课程时间j时候的课程
+                        if(data[num].list[i].course[j] == x){
+                            returnData.push(x+" "+"星期"+i+" "+"第"+j+"节"+" "+"教室:"+data[num].name);
+                            //课程信息压入returnData临时数组
+                        }
+                    }
+                }
+            }
+        }
+        return returnData;
+    }
+    //将查询到的课程信息给返回值
+    //测试:
+    //search("线性代数")
+    //["线性代数 星期0 第1节 教室:数理301", "线性代数 星期4 第1节 教室:数理301"]
+    document.onkeyup = function(){
+        var searchX = input.value;
+        var arr = search(searchX);
+        //console.log(arr);
+        //当使用IE/360兼容模式以外的浏览器时候可以使用console.log调试
+
+        //打印
+        wrap.innerHTML="";//初始化
+        for(var i in arr){
+            var p = document.createElement("p");
+            p.innerHTML = arr[i];
+            wrap.appendChild(p);
+        }
+    }
+</script>
+</body>
+</html>

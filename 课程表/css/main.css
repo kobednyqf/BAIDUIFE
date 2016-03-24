@@ -1,0 +1,98 @@
+/*main.css*/
+body{margin: 0;padding: 0}
+body,a,input,p,span,textarea{
+	font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif
+}
+
+.clearfix:before,
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix:after{clear: both}
+.clearfix{zoom:1;}/*IE<8*/
+
+.h800{height: 800px}
+.bg-ee{background-color: #eeeeee}
+.bg-white{background-color: white}
+.bg-h2co3{background-color: rgb(51,122,183)}
+.bg-cc{background-color: #ccc}
+.relative{position: relative}
+.flex-parent{
+	display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+    display: -moz-box; /* Firefox 17- */
+    display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+    display: -moz-flex; /* Firefox 18+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+}
+.flex-child{
+	padding: 40px 0;
+	margin: auto;
+	width: 300px;
+	min-height: 100px;
+}
+.bg-fc{
+	background-color: #FC0
+}
+.top-corner{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top:0;
+	left: 0;
+	-webkit-border-radius:0 0 50px 0;
+}
+.bottom-corner{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	bottom:0;
+	right: 0;
+	-webkit-border-radius:50px 0 0 0;
+}
+.hd-input{
+	width: 300px;
+	height: 200px;
+	border: 0;
+	padding: 0;
+}
+.hd-input{
+	text-align: center;
+	line-height: 200px;
+	font-size:2em;
+	transition:height 0.5s;
+	-webkit-transition:height 0.5s;
+	-ms-transition:height 0.5s;
+	-o-transition:height 0.5s;
+}
+.hd-input:focus{
+	line-height: 3em;
+	height: 3em;
+	outline:none;
+	text-align: center;
+	background-color: white;
+}
+.hd-input + p{
+	text-align: center;
+	line-height: 30px;
+	margin:0;
+	display: none;
+}
+.hd-input:focus + p{
+	display: block;
+}
+#wrap p{
+	font-size: 1em;
+	text-align: center;
+	line-height: 30px;
+	margin:0;
+}
+#wrap p{
+	white-space: none;
+	text-overflow:ellipsis;
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
