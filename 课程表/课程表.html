@@ -86,6 +86,21 @@
             wrap.appendChild(p);
         }
     }
+
+    document.ontouchend = function(){
+        var searchX = input.value;
+        var arr = search(searchX);
+        //console.log(arr);
+        //当使用IE/360兼容模式以外的浏览器时候可以使用console.log调试
+
+        //打印
+        wrap.innerHTML="";//初始化
+        for(var i in arr){
+            var p = document.createElement("p");
+            p.innerHTML = arr[i];
+            wrap.appendChild(p);
+        }
+    }
 </script>
 </body>
 </html>
