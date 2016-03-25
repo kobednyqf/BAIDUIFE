@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 16</title>
+    <style>input{width: 80px}</style>
+    <style>#arr{background-color: #eeeeee;font-size:0.5em;line-height:2em}</style>
+    <style>
+    #aqi-list p a{
+      text-decoration:none;
+      color:red;padding: 0 0.5em;
+      line-height: 1em;
+      font-size: 1em
+    }
+    body,a,input,p,span,textarea{
+      font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
+    body{margin: 0;}
+    body .wrap{margin: 10px}
+    .alert{
+      color: white;
+      text-align: center;
+      background-color: #D85151;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    </style>
+  </head>
+<body>
+<div class="wrap">
+  <span>
+    <label>城市</label><input max-length="3" id="city">
+  </span>
+  <span>
+    <label>空气质量</label><input max-length="3" id="air">
+  </span>
+  <button id="bt">添加</button>
+  <p id="arr">数组</p>
+  <h3>空气质量排名</h3>
+  <ul id="aqi-list">
+  </ul>
+</div>
+<script type="text/javascript">
+var flag;
+var aqiData = [
+  ["北京", 20],
+  ["上海", 30],
+  ["福州", 80],
+  ["深圳", 90],
+  ["西雅图", 95],
+  ["广州", 35],
+  ["成都", 40],
+  ["西安", 50]
+];
+
+var city = document.getElementById("city");
+var air = document.getElementById("air");
+var bt = document.getElementById("bt");
+var arr = document.getElementById("arr");
+var ul = document.getElementById("aqi-list");
+
+function addEvent(element,event,listener){
+  if(element.addEventListener){
+      element.addEventListener(event,listener,false);//不捕获
+  }
+  else if(element.attachEvent){
+      element.attachEvent("on"+event,listener);
+  }
+  else{
+      element["on"+event] = listener;
+  }
+}
+
+function init(){
+  city.value ="";
+  air.value = "";
+  arr.innerHTML = JSON.stringify(aqiData);
+};
+
+function isCity(name){
+  var reg = /^[\u4e00-\u9fa5]{1,10}$|^[a-zA-Z]{1,10}$/;
+  return reg.test(name);
+}
+
+function isAir(num){
+  var reg = /^(0|[1-9][0-9]|100)$/;
+  return reg.test(num);
+}
+
+function getData(){
+  var aq_data = sortAqiData(aqiData);
+  ul.innerHTML="";//初始化
+  var j = 1;
+  for(var i in aq_data){
+    if(aq_data[i][1]>60){
+      var p = document.createElement("p");
+      p.innerHTML = "第" + (j++) + "名" + " " + aq_data[i][0] + " " + aq_data[i][1] +" " + "<a onclick=\"pop(\'"+aq_data[i][0]+"\')\" href=\"javascript:void(0)\">删除</a>";
+      ul.appendChild(p);
+    }
+  }
+}
+
+function sortAqiData(data) {
+  data.sort(function(a,b){
+    return b[1]-a[1];
+  })//从高到低
+  return data;
+}
+
+function pop(name){
+  var newArr = [];
+  for(var i=0;i<aqiData.length;i++){
+    if(aqiData[i][0]==name){
+      continue;
+    }
+    else{
+      newArr.push(aqiData[i]);
+    }
+  }
+  window.aqiData = newArr.reverse();
+  getData();
+  init();
+}
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  getData();
+  init();
+
+  addEvent(bt,"click",function(){
+    var c = city.value.replace(/ /ig,"");
+    var a = air.value.replace(/ /ig,"");
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    if(isCity(c)&&isAir(a)){
+      aqiData.push([c,a]);
+      getData();
+      init();
+      return true;
+    }
+    //fault
+    if(!isCity(c)){
+      var div = document.createElement('div');
+      div.innerHTML = "<p>请输入中文/英文城市名哦</p>";
+      div.setAttribute("class","alert");
+      document.body.appendChild(div);
+      flag = 1;
+      addEvent(div,'click',function(){
+        document.body.removeChild(div);
+        flag = 0;
+      })
+      return false;
+    }
+    if(!isAir(a)){
+      var div = document.createElement('div');
+      div.innerHTML = "<p>请输入小等于100的正整数哦</p>";
+      div.setAttribute("class","alert");
+      document.body.appendChild(div);
+      flag = 1;
+      addEvent(div,'click',function(){
+        document.body.removeChild(div);
+        flag = 0;
+      })
+      return false;
+    }
+  })
+
+})();
+
+</script>
+</body>
+</html>
