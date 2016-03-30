@@ -1,0 +1,6 @@
+.aqi-chart-wrap{height: 400px;position: relative;}
+.aqi-chart-wrap div{
+	position: absolute;
+	bottom:0;
+	border: 0;
+}
