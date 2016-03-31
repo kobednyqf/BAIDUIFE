@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 19</title>
+    <style>input{width: 80px}</style>
+    <style>#arr{background-color: #eeeeee;font-size:0.5em;line-height:2em}</style>
+    <style>
+    #aqi-list p a{
+      text-decoration:none;
+      color:red;padding: 0 0.5em;
+      line-height: 1em;
+      font-size: 1em
+    }
+    body,a,input,p,span,textarea{
+      font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
+    body{margin: 0;}
+    body .wrap{margin: 10px}
+    .alert{
+      color: white;
+      text-align: center;
+      background-color: #D85151;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    #arr button{
+      border: none;
+      background-color: white;
+      margin: 0 10px;
+      padding: 1px 3px;
+    }
+    .gui{
+      position: relative;
+      height: 400px;
+      width: 80%;
+      margin:10px 10%;
+      text-align: center;
+    }
+    .gui div{
+      position: absolute;
+      bottom: 0;
+      display: block;
+      bottom: 0;
+    }
+    </style>
+  </head>
+<body>
+<div class="wrap">
+  <span>
+    <label></label><input max-length="3" id="air">
+  </span>
+  <button id="lpush">左压入</button>
+  <button id="rpush">右压入</button>
+  <button id="lpop">左弹出</button>
+  <button id="rpop">右弹出</button>
+  <button id="guiQsort">快速排序</button>
+  <p id="arr">数组</p>
+</div>
+<div class="gui">
+</div>
+<script type="text/javascript">
+var flag;
+var aqiData = [13,22,23,19,18,30,50,60,85,60,70,87,90,85,98,89,96,94,95,91,92,99,96,96,94,90,93,82,75,78,90,72,45,60,55,26,20,23,12,24,21];
+
+var air = document.getElementById("air");
+var lpush = document.getElementById("lpush");
+var rpush = document.getElementById("rpush");
+var lpop = document.getElementById("lpop");
+var rpop = document.getElementById("rpop");
+var arr = document.getElementById("arr");
+var guiQsort = document.getElementById("guiQsort");
+
+function addEvent(element,event,listener){
+  if(element.addEventListener){
+      element.addEventListener(event,listener,false);//不捕获
+  }
+  else if(element.attachEvent){
+      element.attachEvent("on"+event,listener);
+  }
+  else{
+      element["on"+event] = listener;
+  }
+}
+
+function gui(){
+  var gui = document.getElementsByClassName("gui")[0];
+  var helper = [];
+  var l = aqiData.length;
+  var rainbow = ['#9DCBF9','#89C0F7','#77B6F5','#4E94DA','#3F8BD6','#3B80C5','#3F8BD6','#4E94DA','#77B6F5','#89C0F7'];
+  var j=0;
+  for(var i in aqiData){
+    if(j==10){j=0};
+    helper.push("<div style=\"");
+    helper.push("background-color:" +rainbow[j++]+ ";");
+    helper.push("height:" +aqiData[i]+ "%;");
+    helper.push("width:" +90/l+ "%;");
+    helper.push("margin-left:" +(-45/l)+ "%;");
+    helper.push("left:" +(50+(i-0.5*l+0.5)*100/l)+ "%;");
+    helper.push("\"></div>");
+  }
+  gui.innerHTML = helper.join('');
+}
+
+
+
+
+function init(){
+  air.value = "";
+  arr.innerHTML="";
+  for(var i=0;i<aqiData.length;i++){
+    arr.innerHTML += "<button onclick=\"pop("+aqiData[i]+")\">"+aqiData[i]+"</button>"
+  }
+  gui();
+};
+
+
+function isAir(num){
+  var reg = /^([1-9][0-9]{1}|100)$/;
+  return reg.test(num);
+}
+
+
+function sortAqiData(data) {
+  data.sort(function(a,b){
+    return b-a;
+  })//从高到低
+  return data;
+}
+
+function qsort(arr,left,right){
+  var i,j,t,temp;
+  if(left>right)
+    return true;
+  temp = arr[left];
+  i=left;
+  j=right;
+  while(i!=j){
+
+    while(arr[j]>=temp && i<j)
+      j--;
+    while(arr[i]<=temp && i<j)
+      i++;
+
+    if(i<j){
+      t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+      init();
+    }
+  }
+
+  arr[left] = arr[i];
+  arr[i] = temp;
+  init();
+  function l(){qsort(arr,left,i-1);}
+  function r(){qsort(arr,i+1,right);}
+  setTimeout(l,100);
+  setTimeout(r,100);
+}
+
+
+function pop(name){
+  var newarr = [];
+  for(var i=0;i<aqiData.length;i++){
+    if(aqiData[i]==name){
+      continue;      
+    }
+    else{
+      newarr.push(aqiData[i]);
+    }
+  }
+  aqiData = newarr;
+  init();
+}
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  init();
+
+  addEvent(lpush,"click",function(){
+    var a = parseInt(air.value.replace(/ /ig,""));
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    if(isAir(a)){
+      aqiData.reverse();
+      aqiData.push(a);
+      aqiData.reverse();
+      init();
+      return true;
+    }
+    //fault
+    if(!isAir(a)){
+      error();
+      return false;
+    }
+  })
+
+  addEvent(rpush,"click",function(){
+    var a = parseInt(air.value.replace(/ /ig,""));
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    if(isAir(a)){
+      aqiData.push(a);
+      init();
+      return true;
+    }
+    //fault
+    if(!isAir(a)){
+      error();
+      return false;
+    }
+  })
+
+  addEvent(lpop,"click",function(){
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+
+    pop(aqiData[0]);
+    init();
+    return true;
+
+  })
+
+  addEvent(rpop,"click",function(){
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+
+    pop(aqiData[aqiData.length-1]);
+    init();
+    return true;
+
+  })
+
+
+  //gui+qsort
+  addEvent(guiQsort,"click",function(){
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    qsort(aqiData,0,aqiData.length-1);
+    //init();
+    return true;
+
+  })
+
+})();
+
+function error(){
+      var div = document.createElement('div');
+      div.innerHTML = "<p>请输入10~100整数哦</p>";
+      div.setAttribute("class","alert");
+      document.body.appendChild(div);
+      flag = 1;
+      addEvent(div,'click',function(){
+        document.body.removeChild(div);
+        flag = 0;
+      })
+}
+</script>
+</body>
+</html>

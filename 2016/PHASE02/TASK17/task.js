@@ -73,17 +73,20 @@ function renderChart() {
   var wrap = document.getElementsByClassName('aqi-chart-wrap')[0];
   var l = json.length;
   var count =0;
+  var helper = [];
   wrap.innerHTML = "";
   for(var i in json){
     if(count==4)
       count = 0;
-    var div = document.createElement("div");
+    //var div = document.createElement("div");
     //div.style.cssText.height = 0.7*json[i];
     //div.style.cssText.width = 92/l+"%";
     //div.style.cssText.backgroundColor = rainbow[count++];
     //div.style.cssText.left = 100/l*i+"%";
-    div.style.cssText = "height:"+0.7*json[i]+";width:"+92/l+"%;background:"+rainbow[count++]+";left:"+100/l*i+"%;";
-    wrap.appendChild(div);
+    //div.style.cssText = "height:"+0.7*json[i]+";width:"+92/l+"%;background:"+rainbow[count++]+";left:"+100/l*i+"%;";
+    helper.push("<div style=\"height:"+0.7*json[i]+"px;width:" + 92/l + "%;background:" + rainbow[count++] + ";left:" + 100/l*i + "%;\"></div>");
+    //已经兼容IE7
+    wrap.innerHTML = helper.join('');
   }
 
 }
