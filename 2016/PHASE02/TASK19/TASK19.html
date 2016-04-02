@@ -110,7 +110,7 @@ function init(){
   air.value = "";
   arr.innerHTML="";
   for(var i=0;i<aqiData.length;i++){
-    arr.innerHTML += "<button onclick=\"pop("+aqiData[i]+")\">"+aqiData[i]+"</button>"
+    arr.innerHTML += "<button onclick=\"pop("+i+")\">"+aqiData[i]+"</button>"
   }
   gui();
 };
@@ -121,6 +121,19 @@ function isAir(num){
   return reg.test(num);
 }
 
+function pop(index){
+  var newarr = [];
+  for(var i=0;i<aqiData.length;i++){
+    if(i==index){
+      continue;      
+    }
+    else{
+      newarr.push(aqiData[i]);
+    }
+  }
+  aqiData = newarr;
+  init();
+}
 
 function sortAqiData(data) {
   data.sort(function(a,b){
