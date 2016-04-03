@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 21</title>
+    <style>input{width: 80px}</style>
+    <style>#arr{background-color: #eeeeee;font-size:0.5em;line-height:2em}</style>
+    <style>#tagarr{background-color: #eeeeee;font-size:0.5em;line-height:2em}</style>
+    <style>
+    #aqi-list p a{
+      text-decoration:none;
+      color:red;padding: 0 0.5em;
+      line-height: 1em;
+      font-size: 1em
+    }
+    body,a,input,p,span,textarea{
+      font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
+    body{margin: 0;}
+    body .wrap{margin: 10px}
+    .alert{
+      color: white;
+      text-align: center;
+      background-color: #D85151;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    #arr button,#tagarr button{
+      border: none;
+      background-color: white;
+      margin: 0 10px;
+      padding: 1px 3px;
+    }
+    .gui{
+      position: relative;
+      height: 400px;
+      width: 80%;
+      margin:10px 10%;
+      text-align: center;
+    }
+    .gui div{
+      padding-top: 10px;
+      position: absolute;
+      bottom: 0;
+      display: block;
+      bottom: 0;
+      overflow-y:hidden;
+      overflow-wrap:break-word;
+    }
+    .gui div span{color: white;font-weight: bold}
+    textarea{
+      display: block;
+      resize:none;
+      width: 60%;
+      margin: 10px 0;
+    }
+    #tag{width: 30%}
+    </style>
+  </head>
+<body>
+<div class="wrap">
+  <span>
+    <label>TAG:</label><input id="tag">
+  </span>
+  <p id="tagarr">tag数组</p>
+  <span>
+    <label></label><textarea id="air"></textarea>
+  </span>
+  <button id="rpush">确认兴趣爱好</button>
+  <p id="arr">hobby数组</p>
+</div>
+<div class="gui">
+</div>
+<script type="text/javascript">
+var flag;
+var aqiData = ['VR','艾米纳姆','古典音乐','设计','英语','互联网','创业','美食','篮球'];
+var tagData = ['科技','音乐','体育','美食'];
+var air = document.getElementById("air");
+var tag = document.getElementById("tag");
+var rpush = document.getElementById("rpush");
+var arr = document.getElementById("arr");
+var tagarr = document.getElementById("tagarr");
+
+function addEvent(element,event,listener){
+  if(element.addEventListener){
+      element.addEventListener(event,listener,false);//不捕获
+  }
+  else if(element.attachEvent){
+      element.attachEvent("on"+event,listener);
+  }
+  else{
+      element["on"+event] = listener;
+  }
+}
+
+function gui(arr){
+  var gui = document.getElementsByClassName("gui")[0];
+  var helper = [];
+  var l = arr.length;
+  var rainbow = ['#9DCBF9','#89C0F7','#77B6F5','#4E94DA','#3F8BD6','#3B80C5','#3F8BD6','#4E94DA','#77B6F5','#89C0F7'];
+  var j=0;
+  for(var i in arr){
+    if(j==10){j=0};
+    helper.push("<div style=\"");
+    helper.push("background-color:" +rainbow[j++]+ ";");
+    helper.push("height:" +(100-90/l)+ "%;");
+    helper.push("width:" +90/l+ "%;");
+    helper.push("margin-left:" +(-45/l)+ "%;");
+    helper.push("left:" +(50+(i-0.5*l+0.5)*100/l)+ "%;");
+    helper.push("\">"+arr[i]+"</div>");
+  }
+  gui.innerHTML = helper.join('');
+}
+
+function initTag(){
+  tagarr.innerHTML="";
+  for(var j=0;j<tagData.length;j++){
+    tagarr.innerHTML += "<button onclick=\"dele("+j+")\">"+tagData[j]+"</button>"
+  }
+}
+function emptyTag(){tag.value = "";}
+function initArr(){
+  //air.value = "";
+  arr.innerHTML="";
+  for(var i=0;i<aqiData.length;i++){
+    arr.innerHTML += "<button onclick=\"pop("+i+")\">"+aqiData[i]+"</button>"
+  }
+
+  gui(aqiData);
+}
+function emptyArr(){air.value = "";}
+
+function init(){
+  emptyTag();
+  emptyArr();
+  initTag();
+  initArr();
+};
+
+
+function isAir(num){
+  if(!num instanceof Array)
+    return false;
+  var reg = /^([0-9a-zA-Z-_\u4e00-\u9fa5]){1,}$/;
+  for(var i in num){
+    if(!reg.test(num[i]))
+      return false;
+  }
+  return true;
+}
+
+function pop(index){
+  var newarr = [];
+  for(var i=0;i<aqiData.length;i++){
+    if(i==index){
+      continue;      
+    }
+    else{
+      newarr.push(aqiData[i]);
+    }
+  }
+  aqiData = newarr;
+  initArr();
+}
+
+
+function dele(index){
+  var newarr = [];
+  for(var i=0;i<tagData.length;i++){
+    if(i==index){
+      continue;      
+    }
+    else{
+      newarr.push(tagData[i]);
+    }
+  }
+  tagData = newarr;
+  initTag();
+}
+
+
+function error(){
+      var div = document.createElement('div');
+      div.innerHTML = "<p>请输入数字/中文/英文/下划线组合哦</p>";
+      div.setAttribute("class","alert");
+      document.body.appendChild(div);
+      flag = 1;
+      addEvent(div,'click',function(){
+        document.body.removeChild(div);
+        flag = 0;
+      })
+}
+
+
+//数组去空  
+function trimArray(arr){
+  var newarr=[]
+  for(var i=0;i<arr.length;i++){
+    var node = arr[i].replace(/ /ig,"");
+    if(node.length<=0)
+      continue
+    else
+      newarr.push(node);
+  }
+  return newarr;
+}
+
+function fordivide(str){
+  var arr=[];
+  arr[0]="";    
+  if(!str)
+    return false;
+  else{
+    for(var j=0,i = 0;i<str.length;i++){
+      if(str[i]!=";"&&str[i]!=" "&&str[i]!=","&&str[i]!="`"&&str[i]!="\n"&&str[i]!="，"&&str[i]!="；"){
+        arr[j]+=str[i];
+      }
+      else if(str[i]==";"||str[i]==" "||str[i]==","||str[i]=="`"||str[i]=="\n"||str[i]=="，"||str[i]=="；"){
+        arr[++j]="";
+      }
+    }
+  }
+  return arr;
+}
+
+//
+function searchGui(x){
+  gui(aqiData);
+  //预处理
+  var oldData = aqiData;
+  var newData = [];
+  for(var i=0;i<oldData.length;i++){
+    //查询是否存在
+    var node = oldData[i].replace(x,'<span>'+x+'</span>');
+    newData.push(node);
+    //直接返回span的innerHTML
+  }
+  gui(newData);
+  //再次GUI
+}
+
+//arr tagarr事件代理
+function delegate(id,tagName,inner_HTML){
+  var parent = document.getElementById(id);
+  var save = {};
+  //
+  addEvent(parent,'mouseover',function(e){
+    var ev = e || window.event;
+    var target = ev.target;
+    if(target.nodeName.toUpperCase()==tagName){
+      target.style.cssText = "background-color:red;color:white";
+      save.nodeHTML = target.innerHTML;
+      target.innerHTML = inner_HTML+target.innerHTML;
+    }
+    else if(target.nodeName.toUpperCase()!=tagName){
+      initTag();
+      initArr();
+    }
+  })
+  //
+}
+
+function listenTag(){
+  var reg = /[,，;；、｀`\s\n]/;
+  if(reg.test(tag.value)){
+    var a = trimArray(fordivide(tag.value.replace(reg,"")));
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    if(isAir(a)){
+      for(var i in a){
+        for(var j in tagData){
+          if(tagData[j]==a[i]){
+            return false;
+          }
+        }
+        tagData.push(a[i]);
+      }
+      while(tagData.length>10){
+        dele(0);
+      }
+      initTag();
+      emptyTag();
+      return true;
+    }
+    //fault
+    if(!isAir(a)){
+      error();
+      return false;
+    }
+  }
+}
+
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  init();
+
+  addEvent(rpush,"click",function(){
+    var a = trimArray(fordivide(air.value));
+    //预清除
+    if(flag==1){
+      var alertNode = document.getElementsByClassName("alert")[0];
+      document.body.removeChild(alertNode);
+      flag = 0;
+    }
+    if(isAir(a)){
+      for(var i in a){
+        for(var j in aqiData){
+          if(aqiData[j]==a[i]){
+            return false;
+          }
+        }
+        aqiData.push(a[i]);
+      }
+      while(aqiData.length>10){
+        pop(0);
+      }
+      initArr();
+      emptyArr();
+      return true;
+    }
+    //fault
+    if(!isAir(a)){
+      error();
+      return false;
+    }
+  })
+
+
+  delegate("tagarr","BUTTON","删除");
+  delegate("arr","BUTTON","删除");
+
+  addEvent(tag,'keyup',function(){
+    listenTag();
+  })
+
+})();
+</script>
+</body>
+</html>
