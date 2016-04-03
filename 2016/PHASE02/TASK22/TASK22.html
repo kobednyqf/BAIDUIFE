@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cn-ZH">
+<head>
+	<meta charset="UTF-8">
+	<title>TASK22</title>
+	<style>
+	.main{text-align: center}
+	.wrap{
+		margin: 20px auto;
+		text-align: center;
+	}
+	.wrap div{
+		border: solid 1px rgb(51,122,183);
+		background-color: white;
+		transition: background-color 0.6s ease-out;
+		-webkit-transition: background-color 0.6s ease-out;
+		-ms-transition: background-color 0.6s ease-out;
+		-o-transition: background-color 0.6s ease-out;
+		-moz-transition: background-color 0.6s ease-out;
+	}
+	#root{
+		width: 800px;
+		height: 400px;
+		margin: 0 auto;
+	}
+	#root >div{
+		width: 380px;
+		height: 360px;
+		margin: 20px auto;
+		display: inline-block;
+	}
+	#root >div >div{
+		width: 170px;
+		height: 320px;
+		margin: 20px auto;
+		display: inline-block;
+	}
+	#root >div >div >div{
+		width: 65px;
+		height: 280px;
+		margin: 20px auto;
+		display: inline-block;
+	}
+
+
+	#footer{text-align: center}
+	#footer button{margin: 20px auto}
+	</style>	
+</head>
+<body>
+	<div class="main">
+		<div class="wrap">
+			<div id="root">
+				<div>
+					<div>
+						<div></div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div></div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<button onclick="DLR()">前序遍历</button>
+			<button onclick="LDR()">中序遍历</button>
+			<button onclick="LRD()">后序遍历</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var interval;
+		var stack = [];
+		var ROOT = document.getElementById("root");
+
+		var changeBg = function(divList){
+			var len = divList.length;
+			var i = 0;
+			divList[i].style.cssText = "background:rgb(51,122,183)";
+			interval = setInterval(function(){
+				if(i < len-1){
+					divList[i].style.cssText = "";
+					divList[++i].style.cssText = "background:rgb(51,122,183)";
+				}
+				else{
+					divList[i].style.cssText = "";
+					clearInterval(interval);
+				}
+			},400)
+		}
+
+		var preOrder = function(node){
+			stack.push(node);
+			if(node.firstElementChild){
+				preOrder(node.firstElementChild);
+			}
+			if(node.lastElementChild){
+				preOrder(node.lastElementChild);
+			}
+		}
+
+		var inOrder = function(node){
+			if(node.firstElementChild){
+				inOrder(node.firstElementChild);
+			}
+			stack.push(node);
+			if(node.lastElementChild){
+				inOrder(node.lastElementChild);
+			}
+		}
+
+		var postOrder = function(node){
+			if(node.firstElementChild){
+				postOrder(node.firstElementChild);
+			}
+			if(node.lastElementChild){
+				postOrder(node.lastElementChild);
+			}
+			stack.push(node);
+		}
+
+		var DLR = function(){
+			stack = [];
+			preOrder(ROOT);
+			changeBg(stack);
+		}
+
+		var LDR = function(){
+			stack = [];
+			inOrder(ROOT);
+			changeBg(stack);
+		}
+
+		var LRD = function(){
+			stack = [];
+			postOrder(ROOT);
+			changeBg(stack);
+		}
+
+	</script>
+</body>
+</html>
