@@ -1,0 +1,320 @@
+body,html{margin: 0;padding: 0}
+.clearfix:before,
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
+
+main{
+    position: relative;
+    margin: 20px 100px;
+}
+table {
+	z-index:2;
+    border-collapse: collapse;
+}
+table td {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+}
+.square{
+	z-index: 3;
+	width: 53px;
+	height: 53px;
+	position: absolute;
+}
+.square{
+	background-color: rgba(0,0,0,0);
+}
+.square{
+	text-align: center
+}
+.square{
+	transition: bottom 0.4s ease-in-out,left 0.4s ease-in-out;
+	-webkit-transition: bottom 0.4s ease-in-out, left 0.4s ease-in-out;
+	-moz-transition: bottom 0.4s ease-in-out, left 0.4s ease-in-out;
+	-ms-transition: bottom 0.4s ease-in-out, left 0.4s ease-in-out;
+	-o-transition: bottom 0.4s ease-in-out, left 0.4s ease-in-out;
+}
+
+.square p{
+	margin: 0;
+	line-height: 53px;
+	font-size:20px;
+}
+/* 逆时针旋转 rotate360-270代表从向下位置转到向右位置 */
+.rotate360-270 {
+    animation-duration: 400ms;
+    animation-name: rotate360-270;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate360-270 {
+    from {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+    to {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+}
+.rotate270-180 {
+     animation-duration: 400ms;
+     animation-name: rotate270-180;
+     animation-fill-mode: forwards;
+ }
+@keyframes rotate270-180 {
+    from {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+    to {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+.rotate180-90 {
+    animation-duration: 400ms;
+    animation-name: rotate180-90;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate180-90 {
+    from {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    to {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+.rotate90-0 {
+    animation-duration: 400ms;
+    animation-name: rotate90-0;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate90-0 {
+    from {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    to {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+
+/* 顺时针旋转 */
+.rotate0-90 {
+    animation-duration: 400ms;
+    animation-name: rotate0-90;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate0-90 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+.rotate90-180 {
+    animation-duration: 400ms;
+    animation-name: rotate90-180;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate90-180 {
+    from {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    to {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+.rotate180-270 {
+    animation-duration: 400ms;
+    animation-name: rotate180-270;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate180-270 {
+    from {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    to {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+}
+.rotate270-360 {
+    animation-duration: 400ms;
+    animation-name: rotate270-360;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate270-360 {
+    from {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+/* 旋转180度 */
+.rotate180-0 {
+    animation-duration: 400ms;
+    animation-name: rotate180-0;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate180-0 {
+    from {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    to {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+.rotate0-180 {
+    animation-duration: 400ms;
+    animation-name: rotate0-180;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate0-180 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+.rotate90-270 {
+    animation-duration: 400ms;
+    animation-name: rotate90-270;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate90-270 {
+    from {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    to {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+}
+.rotate270-90 {
+    animation-duration: 400ms;
+    animation-name: rotate270-90;
+    animation-fill-mode: forwards;
+}
+@keyframes rotate270-90 {
+    from {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+    to {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+
+foot{
+	position: relative;
+}
+.bar{
+	display: inline-block;
+	margin: 0 0 50px 250px;
+}
+#compiler{
+	margin-left: 10px;
+}

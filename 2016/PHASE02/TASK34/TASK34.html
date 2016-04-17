@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="cn-ZH">
+<head>
+	<meta charset="UTF-8">
+	<title>TASK34</title>
+	<link rel="stylesheet" type="text/css" href="square.css">
+</head>
+<body>
+<div>
+	<main>
+		<div id="wrap" class="clearfix">
+			<table id="table">
+			</table>
+		</div>
+		<div id="square" class="square" style="bottom:0;left:0">
+			<p>A</p>
+		</div>
+	</main>
+	<foot>
+		<div class="bar">
+			<button onclick="c.move('left')">LEFT</button>
+			<button onclick="c.move('top')">UP</button>
+			<button onclick="c.move('bottom')">DOWN</button>
+			<button onclick="c.move('right')">RIGHT</button>
+		</div>
+		<br>
+		<div class="bar">
+			<span><input id="input" maxlength="11" placeholder="MOV (x,y)" value="MOV (3,7)"/><button id="compiler">COMPILE</button></span>
+		</div>
+	</foot>
+</div>
+<script type="text/javascript" src="square.js"></script>
+</body>
+</html>
