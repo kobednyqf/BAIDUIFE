@@ -7,6 +7,7 @@ var c = new controller();
 controller.prototype.drawExit = function(){
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(0,0,5,10);
+	ctx.fillStyle = "#43D7AA";
 }
 
 
