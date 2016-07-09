@@ -22,10 +22,10 @@ textarea:focus,textarea:hover{outline: none}
 .relative{position: relative}
 .left{float:left;}
 .right{float:right;}
-.l{width: 300px;border-right: 2px solid rgb(205,205,205)}
+.l{width: 300px}
 .c{width:300px;border-right: 2px solid rgb(205,205,205)}
 .r{
-	margin-left: 604px;
+	margin-left: 303px;
 	height: 100%;
 }
 .l,.c,.r{min-height: 630px}
@@ -40,9 +40,6 @@ textarea:focus,textarea:hover{outline: none}
 	height: 600px;
 }
 .m-desc{background-color: rgb(240,240,240)}
-.m-desc:focus,.m-desc:hover{
-	background-color: white;
-}
 .graycolor{background-color: rgb(240,240,240)}
 .papercolor{background-color: rgb(240,240,240)}
 .whitecolor{background-color: white}
@@ -63,10 +60,10 @@ textarea:focus,textarea:hover{outline: none}
 	-webkit-transition:text-indent 0.5s;
 }
 .task:hover,.task:focus{
-	background-color: white;
 	text-indent: 60px;
 }
 .save{
+	display: none;
 	margin-left: 40px;
 	color: gray;
 	border-left: solid 2px gray;
